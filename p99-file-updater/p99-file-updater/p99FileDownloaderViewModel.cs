@@ -39,12 +39,12 @@ namespace p99FileUpdater
         {
             if (MessageBox != String.Empty)
             MessageBox = String.Empty;
-            WriteToTextBoxWithString($"Operation Enabled: {OperationEnabled.ToString()}");
+            WriteToTextBoxWithString($"Operation Enabled: {OperationEnabled}");
             if (OperationEnabled == false)
                 OperationEnabled = true;
             else
                 return;
-            WriteToTextBoxWithString($"Operation status: {OperationEnabled.ToString()}.");
+            WriteToTextBoxWithString($"Operation status: {OperationEnabled}.");
             if (ChecksumHashFromFileUrl != default)
                 ChecksumHashFromFileUrl = default;
             try
@@ -158,6 +158,6 @@ namespace p99FileUpdater
         internal byte[] ChecksumHashFromApp { get => p99fuv.checksumHashFromApp; set => SetProperty(ref p99fuv.checksumHashFromApp, value); }
         internal bool? OverrideChecksumValidation { get => p99fuv.overrideChecksumValidation; set => SetProperty(ref p99fuv.overrideChecksumValidation, value); }
         internal Uri DownloadAddress { get => p99fuv.downloadAddress; set => SetProperty(ref p99fuv.downloadAddress, value); }
-        internal bool DisableDownloadButton { get => p99fuv.operationEnabled.HasValue ? !p99fuv.operationEnabled.Value : false; }
+        internal bool DisableDownloadButton { get => p99fuv.operationEnabled.HasValue && !p99fuv.operationEnabled.Value; }
     }
 }
