@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using Windows.UI.Xaml.Data;
 
@@ -8,12 +9,7 @@ namespace p99FileUpdater.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if(value == null)
-                return String.Empty;
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in (byte[])value)
-                sb.Append(b.ToString("x2"));
-            return sb.ToString();
+            return value == null ? String.Empty: ((byte[])value).Select(x => x.ToString("x2")).Aggregate((b1, b2) => String.Join("", new String[] { b1, b2 }));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
